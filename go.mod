@@ -1,4 +1,4 @@
-module Authentication_service
+module github.com/Mubasshira-Tazrin/rate-limiting-api
 
 go 1.20
 
