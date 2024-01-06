@@ -8,7 +8,7 @@ import (
 	"github.com/Mubasshira-Tazrin/rate-limiting-api/internal/constants"
 )
 
-func Start() {
+func StartAPIRateLimiter() {
 	// init logger(slog)
 	l := initSlogger()
 
