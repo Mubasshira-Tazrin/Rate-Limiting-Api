@@ -34,6 +34,7 @@ func (ah AuthHandlers) performPostCallHandler(w http.ResponseWriter, r *http.Req
 	if err != nil {
 		ah.Logger.Error("error retrieving limit/usage from Redis", "err", err.Error())
 		writeResponse(w, http.StatusForbidden, "error retrieving limit/usage from Redis")
+
 		return
 	}
 

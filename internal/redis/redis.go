@@ -39,7 +39,7 @@ func GetRedisValues(limitKey, usageKey string) (int, int, error) {
 
 	limit, err := redis.Int(conn.Do(constants.RedisCmdGet, limitKey))
 	if err != nil {
-		return 0, 0, err
+		return 0, 0, fmt.Errorf("unable to decode redis cmd reply:%w", err)
 	}
 
 	usage, err := redis.Int(conn.Do(constants.RedisCmdGet, usageKey))
