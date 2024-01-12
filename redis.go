@@ -7,6 +7,8 @@ import (
 )
 
 func storeAuthTokenInRedis(authToken string) {
+	conn := getRedisInstance().Get()
+	defer conn.Close()
 	conn, err := redis.Dial("tcp", redisAddress)
 	if err != nil {
 		fmt.Println("Error connecting to Redis:", err)
@@ -26,6 +28,8 @@ func storeAuthTokenInRedis(authToken string) {
 }
 
 func getRedisValues(limitKey, usageKey string) (int, int, error) {
+	conn := getRedisInstance().Get()
+	defer conn.Close()
 	conn, err := redis.Dial("tcp", redisAddress)
 	if err != nil {
 		return 0, 0, err
@@ -46,6 +50,8 @@ func getRedisValues(limitKey, usageKey string) (int, int, error) {
 }
 
 func incrementUsage(usageKey string) {
+	conn := getRedisInstance().Get()
+	defer conn.Close()
 	conn, err := redis.Dial("tcp", redisAddress)
 	if err != nil {
 		fmt.Println("Error connecting to Redis:", err)

@@ -8,7 +8,6 @@ import (
 func createAuthTokenHandler(w http.ResponseWriter, r *http.Request) {
 	authToken := generateAuthToken()
 	storeAuthTokenInRedis(authToken)
-
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "auth_token: %s", authToken)
 }
@@ -24,6 +23,8 @@ func performPostCallHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	usageKey, limitKey := constructRedisKeys(authToken)
+	conn := getRedisInstance().Get()
+	defer conn.Close()
 
 	limit, usage, err := getRedisValues(limitKey, usageKey)
 	if err != nil {

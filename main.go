@@ -2,7 +2,7 @@ package main
 
 import "net/http"
 
-var redisAddress = "localhost:6379"
+var redisAddress = "127.0.0.1:6379"
 
 func main() {
 	http.HandleFunc("/v1/create-auth-token", createAuthTokenHandler)
